@@ -54,19 +54,13 @@ export const solvePartTwo = () => {
 
       const l = current.length;
 
-      const firstHalf = current.slice(0, current.length / 2);
-      const secondHalf = current.slice(current.length / 2);
-      if (firstHalf === secondHalf) {
-        badIds.push(cur);
-      } else {
-        for (let i = 1; i < l / 2; i++) {
+        for (let i = 1; i <= l / 2; i++) {
           const substring = current.slice(0, i);
           if (substring.repeat(l / substring.length) === current) {
             badIds.push(cur);
             break;
           }
         }
-      }
 
       cur++;
     }
