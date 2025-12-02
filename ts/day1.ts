@@ -7,7 +7,7 @@ const parseTurn = (turn: string): [string, number] => {
   return [direction, clicks];
 }
 
-const solvePartOne = () => {
+export const solvePartOne = () => {
   let hits = 0;
   let currentPosition = 50;
 
@@ -27,7 +27,7 @@ const solvePartOne = () => {
   console.log(hits);
 }
 
-const solvePartTwo = () => {
+export const solvePartTwo = () => {
   let hits = 0;
   let currentPosition = 50;
 
@@ -46,5 +46,3 @@ const solvePartTwo = () => {
   console.log(hits);
 }
 
-solvePartOne();
-solvePartTwo();
