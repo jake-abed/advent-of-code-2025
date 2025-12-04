@@ -1,7 +1,7 @@
 const rawInput = await Deno.readTextFile("./inputs/day3.txt");
-const banks = rawInput.split("\n").map((a) => a.trim()).filter((a) => a !== '');
+const banks = rawInput.split("\n").map((a) => a.trim()).filter((a) => a !== "");
 
-const scanForHighest = (bank: string): [number, number] => {
+const scanForHighestPartOne = (bank: string): [number, number] => {
   let highest = parseInt(bank[0]);
   let highestIdx = 0;
 
@@ -14,9 +14,12 @@ const scanForHighest = (bank: string): [number, number] => {
   }
 
   return [highest, highestIdx];
-}
+};
 
-const scanForNextHighest = (bank: string, highestIdx: number): [number, number] => {
+const scanForNextHighestPartOne = (
+  bank: string,
+  highestIdx: number,
+): [number, number] => {
   let second = parseInt(bank[highestIdx + 1]);
   let secondIdx = highestIdx + 1;
 
@@ -30,17 +33,52 @@ const scanForNextHighest = (bank: string, highestIdx: number): [number, number] 
   }
 
   return [second, secondIdx];
-}
+};
 
 export const solvePartOne = () => {
   const nums: number[] = [];
 
   for (const bank of banks) {
-    const [highest, idx1] = scanForHighest(bank);
-    const [second, _idx2] = scanForNextHighest(bank, idx1);
+    const [highest, idx1] = scanForHighestPartOne(bank);
+    const [second, _idx2] = scanForNextHighestPartOne(bank, idx1);
 
     nums.push(highest * 10 + second);
   }
 
   console.log(nums.reduce((a, acc) => a + acc, 0));
-}
+};
+
+const getHighestRemaining = (
+  bank: string,
+  nextIdx: number,
+  remaining: number,
+): string => {
+  let idx = -1;
+  let val = 0;
+
+  for (let i = nextIdx; i < bank.length - (remaining - 1); i++) {
+    const current = parseInt(bank[i]);
+    if (current > val) {
+      idx = i;
+      val = current;
+    }
+  }
+
+  if (remaining === 1) {
+    return `${val}`;
+  } else {
+    return val.toString() + getHighestRemaining(bank, idx + 1, remaining - 1);
+  }
+};
+
+export const solvePartTwo = () => {
+  const nums: number[] = [];
+
+  for (const bank of banks) {
+    nums.push(parseInt(getHighestRemaining(bank, 0, 12)));
+  }
+
+  console.log(nums.reduce((a, acc) => a + acc, 0));
+};
+
+solvePartTwo();
