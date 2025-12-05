@@ -31,7 +31,7 @@ export const solvePartOne = (): { hits: number; time: number } => {
   return { hits, time };
 };
 
-export const solvePartTwo = (): { hits: number, time: number } => {
+export const solvePartTwo = (): { hits: number; time: number } => {
   const tZero = performance.now();
   let hits = 0;
   let currentPosition = 50;
