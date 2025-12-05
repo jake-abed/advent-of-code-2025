@@ -27,34 +27,33 @@ export const solvePartOne = (): { sum: number; time: number } => {
   return { sum, time };
 };
 
-export const solvePartTwo = (): { sum: number, time: number } => {
+export const solvePartTwo = (): { sum: number; time: number } => {
   const tZero = performance.now();
   let sum = 0;
 
   const sortedRanges = ranges.toSorted((a, b) => a[0] - b[0]);
+  const flattened: number[][] = [];
 
-
-  let rangeStart = sortedRanges[0][0];
-  let rangeEnd = sortedRanges[0][1];
-
-  for (let i = 1; i < sortedRanges.length; i++) {
+  for (let i = 0; i < sortedRanges.length; i++) {
     const range = sortedRanges[i];
 
-    if (range[1] > rangeEnd) {
-      if (range[0] <= rangeEnd) {
-        rangeEnd = range[1];
-      } else {
-        sum += rangeEnd - rangeStart + 1;
-        rangeStart = range[0];
-        rangeEnd = range[1];
-      }
+    if (flattened.length === 0) {
+      flattened.push(range);
+      continue;
     }
 
+    if (range[1] > flattened[flattened.length - 1][1]) {
+      if (range[0] <= flattened[flattened.length - 1][1]) {
+        flattened[flattened.length - 1][1] = range[1];
+      } else {
+        flattened.push(range);
+      }
+    }
   }
 
-  sum += rangeEnd - rangeStart + 1;
+  sum += flattened
+    .map(r => r[1] - r[0] + 1).reduce((a, acc) => a + acc, 0);
 
   const time = performance.now() - tZero;
   return { sum, time };
-}
-
+};
