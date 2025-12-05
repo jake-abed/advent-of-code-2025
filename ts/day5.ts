@@ -27,9 +27,8 @@ export const solvePartOne = (): { sum: number; time: number } => {
   return { sum, time };
 };
 
-export const solvePartTwo = (): { sum: number; time: number } => {
+export const solvePartTwo = (): { sum: number, time: number } => {
   const tZero = performance.now();
-  let sum = 0;
 
   const sortedRanges = ranges.toSorted((a, b) => a[0] - b[0]);
   const flattened: number[][] = [];
@@ -51,8 +50,8 @@ export const solvePartTwo = (): { sum: number; time: number } => {
     }
   }
 
-  sum += flattened
-    .map(r => r[1] - r[0] + 1).reduce((a, acc) => a + acc, 0);
+  const diffs = flattened.map((r) => r[1] - r[0] + 1);
+  const sum = diffs.reduce((a, acc) => a + acc, 0);
 
   const time = performance.now() - tZero;
   return { sum, time };
