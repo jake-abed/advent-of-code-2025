@@ -2,6 +2,7 @@ import * as DayOne from "./day1.ts";
 import * as DayTwo from "./day2.ts";
 import * as DayThree from "./day3.ts";
 import * as DayFour from "./day4.ts";
+import * as DayFive from "./day5.ts";
 
 const { hits: d1p1Count, time: d1p1Time } = DayOne.solvePartOne();
 console.log(`Day One, Part One - Hits: ${d1p1Count} in ${d1p1Time} ms`);
@@ -22,3 +23,8 @@ const { sum: d4p1Count, time: d4p1Time } = DayFour.solvePartOne();
 console.log(`Day Four, Part One - Sum: ${d4p1Count} in ${d4p1Time} ms`);
 const { sum: d4p2Count, time: d4p2Time } = DayFour.solvePartTwo();
 console.log(`Day Four, Part Two - Sum: ${d4p2Count} in ${d4p2Time} ms`);
+
+const { sum: d5p1Count, time: d5p1Time } = DayFive.solvePartOne();
+console.log(`Day Five, Part One - Sum: ${d5p1Count} in ${d5p1Time} ms`);
+const { sum: d5p2Count, time: d5p2Time } = DayFive.solvePartTwo();
+console.log(`Day Five, Part Two - Sum: ${d5p2Count} in ${d5p2Time} ms`);
