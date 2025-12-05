@@ -2,7 +2,7 @@
   "lint": true,
   "fmt": {},
   "tasks": {
-    "dev": "deno run --watch ./ts/main.ts"
+    "dev": "deno run -R --watch ./ts/main.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1"

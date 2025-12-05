@@ -5,7 +5,8 @@ const paperMatrix = rows.map((r) => r.split("").map((c) => c.trim()));
 const PAPER = "@";
 const SPACE = ".";
 
-export const solvePartOne = () => {
+export const solvePartOne = (): { sum: number, time: number } => {
+  const tZero = performance.now();
   let reachable = 0;
   const width = paperMatrix[0].length;
   const height = paperMatrix.length;
@@ -34,10 +35,12 @@ export const solvePartOne = () => {
     }
   }
 
-  console.log(reachable);
+  const time = performance.now() - tZero;
+  return { sum: reachable, time };
 };
 
-export const solvePartTwo = (reachable: number = 0) => {
+export const solvePartTwo = (reachable = 0, start = 0): { sum: number, time: number } => {
+  const tZero = start > 0 ? start : performance.now();
   const numberOfRolls = paperMatrix.flat().filter((c) => c === PAPER).length;
   const width = paperMatrix[0].length;
   const height = paperMatrix.length;
@@ -72,10 +75,9 @@ export const solvePartTwo = (reachable: number = 0) => {
   const newNumberOfRolls = paperMatrix.flat().filter((c) => c === PAPER).length;
 
   if (newNumberOfRolls < numberOfRolls) {
-    solvePartTwo(reachable);
+    return solvePartTwo(reachable, tZero);
   } else {
-    console.log(reachable);
+    const time = performance.now() - tZero;
+    return { sum: reachable, time};
   }
-};
-
-solvePartTwo();
+}

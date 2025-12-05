@@ -5,7 +5,8 @@ const parseIdRange = (idRange: string): [string, string] => {
   return idRange.split("-") as [string, string];
 };
 
-export const solvePartOne = () => {
+export const solvePartOne = (): { sum: number; time: number } => {
+  const tZero = performance.now();
   const badIds: number[] = [];
 
   for (const idRange of idRanges) {
@@ -34,10 +35,12 @@ export const solvePartOne = () => {
     }
   }
 
-  console.log(badIds.reduce((id, acc) => id + acc, 0));
+  const time = performance.now() - tZero;
+  return { sum: badIds.reduce((id, acc) => id + acc, 0), time };
 };
 
-export const solvePartTwo = () => {
+export const solvePartTwo = (): { sum: number; time: number } => {
+  const tZero = performance.now();
   const badIds: number[] = [];
 
   for (const idRange of idRanges) {
@@ -54,17 +57,18 @@ export const solvePartTwo = () => {
 
       const l = current.length;
 
-        for (let i = 1; i <= l / 2; i++) {
-          const substring = current.slice(0, i);
-          if (substring.repeat(l / substring.length) === current) {
-            badIds.push(cur);
-            break;
-          }
+      for (let i = 1; i <= l / 2; i++) {
+        const substring = current.slice(0, i);
+        if (substring.repeat(l / substring.length) === current) {
+          badIds.push(cur);
+          break;
         }
+      }
 
       cur++;
     }
   }
 
-  console.log(badIds.reduce((id, acc) => id + acc, 0));
+  const time = performance.now() - tZero;
+  return { sum: badIds.reduce((id, acc) => id + acc, 0), time };
 };

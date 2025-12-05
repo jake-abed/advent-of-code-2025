@@ -35,7 +35,8 @@ const scanForNextHighestPartOne = (
   return [second, secondIdx];
 };
 
-export const solvePartOne = () => {
+export const solvePartOne = (): { sum: number, time: number } => {
+  const tZero = performance.now();
   const nums: number[] = [];
 
   for (const bank of banks) {
@@ -45,7 +46,8 @@ export const solvePartOne = () => {
     nums.push(highest * 10 + second);
   }
 
-  console.log(nums.reduce((a, acc) => a + acc, 0));
+  const time = performance.now() - tZero;
+  return { sum: nums.reduce((a, acc) => a + acc, 0), time };
 };
 
 const getHighestRemaining = (
@@ -71,14 +73,15 @@ const getHighestRemaining = (
   }
 };
 
-export const solvePartTwo = () => {
+export const solvePartTwo = (): { sum: number, time: number } => {
+  const tZero = performance.now();
   const nums: number[] = [];
 
   for (const bank of banks) {
     nums.push(parseInt(getHighestRemaining(bank, 0, 12)));
   }
 
-  console.log(nums.reduce((a, acc) => a + acc, 0));
+  const time = performance.now() - tZero;
+  return { sum: nums.reduce((a, acc) => a + acc, 0), time };
 };
 
-solvePartTwo();
