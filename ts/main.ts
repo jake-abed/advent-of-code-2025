@@ -3,7 +3,7 @@ import * as DayTwo from "./day2.ts";
 import * as DayThree from "./day3.ts";
 import * as DayFour from "./day4.ts";
 import * as DayFive from "./day5.ts";
-import * as DaySix from './day6.ts';
+import * as DaySix from "./day6.ts";
 
 const { hits: d1p1Count, time: d1p1Time } = DayOne.solvePartOne();
 console.log(`Day One, Part One - Hits: ${d1p1Count} in ${d1p1Time} ms`);

@@ -27,7 +27,7 @@ export const solvePartOne = (): { sum: number; time: number } => {
   return { sum, time };
 };
 
-export const solvePartTwo = (): { sum: number, time: number } => {
+export const solvePartTwo = (): { sum: number; time: number } => {
   const tZero = performance.now();
 
   const sortedRanges = ranges.toSorted((a, b) => a[0] - b[0]);
