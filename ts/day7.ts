@@ -1,8 +1,6 @@
 const rawInput = await Deno.readTextFile("./inputs/day7.txt");
 const rows = rawInput.split("\n").map((a) => a.trim()).filter((a) => a !== "");
 
-const partTwoRows = rows.map((row) => row.split("").filter((c) => c !== ""));
-
 export const solvePartOne = (): { count: number; time: number } => {
   const tZero = performance.now();
   let count = 0;
@@ -43,43 +41,28 @@ export const solvePartOne = (): { count: number; time: number } => {
   return { count, time };
 };
 
-type MemoKey = string;
-type Memo = Record<string, number>;
-
-export const solvePartTwo = (): { count: number; time: number } => {
+// This one broke me a bit and I had to look up guidance. My initial solution
+// timed out and would not solve (recursive bfs);
+export const solvePartTwo = () => {
   const tZero = performance.now();
-  const startPosition = rows[0].indexOf("S");
-  const memo: Memo = {};
+  const beams = new Array(rows[0].length).fill(0);
 
-  const count = getTimelines(startPosition, 0, partTwoRows, memo);
-  const time = performance.now() - tZero;
-  return { count, time };
-};
+  beams[rows[0].indexOf("S")] = 1;
 
-const getTimelines = (
-  pos: number,
-  idx: number,
-  grid: string[][],
-  memo: Memo,
-) => {
-  const key = `${pos}/${idx}` as MemoKey;
+  for (const row of rows.slice(1)) {
+    let split = row.indexOf("^", 0);
+    while (split >= 0) {
+      if (beams[split] > 0) {
+        beams[split + 1] += beams[split];
+        beams[split - 1] += beams[split];
+        beams[split] = 0;
+      }
 
-  if (key in memo) {
-    return memo[key]!;
-  }
-
-  let total = 0;
-  for (let i = idx; i < grid.length; i++) {
-    if (grid[i][pos] === "^") {
-      total = 0;
-      total += getTimelines(pos + 1, i + 1, grid, memo);
-      total += getTimelines(pos - 1, i + 1, grid, memo);
-      return total;
+      split = row.indexOf("^", split + 1);
     }
   }
 
-  memo[key] = 1;
-  return 1;
+  const count = beams.reduce((acc, x) => x + acc, 0);
+  const time = performance.now() - tZero;
+  return { count, time };
 };
-
-console.log(solvePartTwo());
