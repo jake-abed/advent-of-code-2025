@@ -38,3 +38,5 @@ console.log(`Day Six, Part Two - Sum: ${d6p2Count} in ${d6p2Time} ms`);
 
 const { count: d7p1Count, time: d7p1Time } = DaySeven.solvePartOne();
 console.log(`Day Seven, Part One - Count: ${d7p1Count} in ${d7p1Time} ms`);
+const { count: d7p2Count, time: d7p2Time } = DaySeven.solvePartTwo();
+console.log(`Day Seven, Part Two - Sum: ${d7p2Count} in ${d7p2Time} ms`);
