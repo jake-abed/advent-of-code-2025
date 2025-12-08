@@ -41,11 +41,9 @@ export const solvePartOne = (): { count: number; time: number } => {
   return { count, time };
 };
 
-// This one broke me a bit and I had to look up guidance. My initial solution
-// timed out and would not solve (recursive bfs);
-export const solvePartTwo = () => {
+export const solvePartTwo = (): { count: number; time: number } => {
   const tZero = performance.now();
-  const beams = new Array(rows[0].length).fill(0);
+  const beams: number[] = rows[0].split("").map((_cell) => 0);
 
   beams[rows[0].indexOf("S")] = 1;
 
@@ -62,7 +60,8 @@ export const solvePartTwo = () => {
     }
   }
 
-  const count = beams.reduce((acc, x) => x + acc, 0);
+  const count = beams.reduce((acc, x) => acc + x, 0);
   const time = performance.now() - tZero;
+
   return { count, time };
 };
