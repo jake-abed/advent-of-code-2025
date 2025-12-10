@@ -5,6 +5,7 @@ import * as DayFour from "./day4.ts";
 import * as DayFive from "./day5.ts";
 import * as DaySix from "./day6.ts";
 import * as DaySeven from "./day7.ts";
+import * as DayEight from "./day8.ts";
 import * as DayNine from "./day9.ts";
 
 const { hits: d1p1Count, time: d1p1Time } = DayOne.solvePartOne();
@@ -42,7 +43,10 @@ console.log(`Day Seven, Part One - Count: ${d7p1Count} in ${d7p1Time} ms`);
 const { count: d7p2Count, time: d7p2Time } = DaySeven.solvePartTwo();
 console.log(`Day Seven, Part Two - Sum: ${d7p2Count} in ${d7p2Time} ms`);
 
-console.log("DAY EIGHT KICKED MY BUNS (NO BUN-O), I WILL RETURN");
+const { product: d8p1Count, time: d8p1Time } = DayEight.solvePartOne();
+console.log(`Day Eight, Part One - Count: ${d8p1Count} in ${d8p1Time} ms`);
+const { product: d8p2Count, time: d8p2Time } = DayEight.solvePartTwo();
+console.log(`Day Eight, Part Two - Sum: ${d8p2Count} in ${d8p2Time} ms`);
 
 const { area: d9p1Count, time: d9p1Time } = DayNine.solvePartOne();
 console.log(`Day Nine, Part One - Are0: ${d9p1Count} in ${d9p1Time} ms`);

@@ -12,7 +12,7 @@ const getArea = (coord1: [number, number], coord2: [number, number]) => {
     ? coord1[1] - coord2[1] + 1
     : coord2[1] - coord1[1] + 1;
 
-  return (width) * (height);
+  return width * height;
 };
 
 export const solvePartOne = () => {
@@ -21,8 +21,13 @@ export const solvePartOne = () => {
   const areas: number[] = [];
 
   for (let i = 0; i < parsedCoords.length; i++) {
-    for (let j = i + 1; j < parsedCoords.length -1; j++) {
-      areas.push(getArea(parsedCoords[i] as [number, number], parsedCoords[j] as [number, number]));
+    for (let j = i + 1; j < parsedCoords.length - 1; j++) {
+      areas.push(
+        getArea(
+          parsedCoords[i] as [number, number],
+          parsedCoords[j] as [number, number],
+        ),
+      );
     }
   }
 
@@ -31,4 +36,3 @@ export const solvePartOne = () => {
   const time = performance.now() - tZero;
   return { area: areas[0], time };
 };
-
